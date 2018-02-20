@@ -112,8 +112,19 @@ void swap_case(Grille *G){
 
 }
 
-void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int k, int l){
+void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l){
   
+  if( *k<0 || *k>G->n || *l<0 || *l>G->m ) return;//on a dépassé la matrice
+
+  else if( c==G->T[*k][*l].fond){ //Si la case (k,l) est de la même couleur que c
+    printf("(%d, %d)\n", *k,*l);
+    return;
+  } 
+  else{return RechercheCaseNaif_c(G, c, i, j, k-1, l);//récursion à gauche
+       return RechercheCaseNaif_c(G, c, i, j, k, l-1);//récursion en haut
+       return RechercheCaseNaif_c(G, c, i, j, k+1, l);//récursion à droite
+       return RechercheCaseNaif_c(G, c, i, j, k, l+1);//récursion en bas
+            }
 }
 
 
