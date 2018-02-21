@@ -1,4 +1,7 @@
-all: Game_SortingRobot Checker_SortingRobot
+all: Game_SortingRobot Checker_SortingRobot 
+
+exo_1.o: exo_1.c
+	gcc -c exo_1.c	
 
 entree_sortie.o: entree_sortie.c entree_sortie.h
 	gcc -c entree_sortie.c

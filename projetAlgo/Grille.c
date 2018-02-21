@@ -143,5 +143,12 @@ void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
 
 }
 
+int Case_est_Noire(Grille * G, int i, int j){
+  if(G->T[i][j].fond ==G->T[i][j].piece){
+    return 1;
+  }
+  else return 0;
+}
 
-void algorithme_naif(Grille *G, Solution *S)
+
+
