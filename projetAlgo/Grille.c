@@ -127,4 +127,21 @@ void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l){
             }
 }
 
+void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
 
+  if( *k<0 || *k>G->n || *l<0 || *l>G->m ) return;//on a dépassé la matrice
+
+  else if( G->T[*k][*l].piece >=0 && G->T[*k][*l].piece != G->T[*k][*l].fond){ //Si la case (k,l) contient une pièce et n'est pas noire
+    printf("(%d, %d)\n", *k,*l);
+    return;
+  } 
+  else{return RechercheCaseNaif_nn(G, i, j, k-1, l);//récursion à gauche
+       return RechercheCaseNaif_nn(G, i, j, k, l-1);//récursion en haut
+       return RechercheCaseNaif_nn(G, i, j, k+1, l);//récursion à droite
+       return RechercheCaseNaif_nn(G, i, j, k, l+1);//récursion en bas
+            }
+
+}
+
+
+void algorithme_naif(Grille *G, Solution *S)
