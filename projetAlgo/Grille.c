@@ -112,13 +112,13 @@ void swap_case(Grille *G){
 
 }
 
-void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l){
+CCase * RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l){
   
-  if( *k<0 || *k>G->n || *l<0 || *l>G->m ) return;//on a dépassé la matrice
+  if( *k<0 || *k>G->n || *l<0 || *l>G->m ) return 0;//on a dépassé la matrice
 
-  else if( c==G->T[*k][*l].fond){ //Si la case (k,l) est de la même couleur que c
-    printf("(%d, %d)\n", *k,*l);
-    return;
+  else if( c==G->T[*k][*l].fond && Case_est_Noire(G, *k, *l)==0){ //Si la case (k,l) est de la même couleur que c, et n'est pas noire
+    CCase * cible = &G->T[*k][*l];
+    return cible;
   } 
   else{return RechercheCaseNaif_c(G, c, i, j, k-1, l);//récursion à gauche
        return RechercheCaseNaif_c(G, c, i, j, k, l-1);//récursion en haut
@@ -127,13 +127,13 @@ void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l){
             }
 }
 
-void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
+CCase * RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
 
-  if( *k<0 || *k>G->n || *l<0 || *l>G->m ) return;//on a dépassé la matrice
+  if( *k<0 || *k>G->n || *l<0 || *l>G->m ) return 0;//on a dépassé la matrice
 
-  else if( G->T[*k][*l].piece >=0 && G->T[*k][*l].piece != G->T[*k][*l].fond){ //Si la case (k,l) contient une pièce et n'est pas noire
-    printf("(%d, %d)\n", *k,*l);
-    return;
+  else if( G->T[*k][*l].piece >=0 && Case_est_Noire(G, *k, *l)==0){ //Si la case (k,l) contient une pièce et n'est pas noire
+    CCase * cible = &G->T[*k][*l];
+    return cible;
   } 
   else{return RechercheCaseNaif_nn(G, i, j, k-1, l);//récursion à gauche
        return RechercheCaseNaif_nn(G, i, j, k, l-1);//récursion en haut
