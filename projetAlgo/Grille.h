@@ -52,11 +52,12 @@ void changement_case(Grille *G, int i, int j);
 // sur la case courante
 void swap_case(Grille *G);
 
-CCase * RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l);
+void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l);
 
-CCase * RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l);
+void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l);
 
 int Case_est_Noire(Grille * G, int i, int j);
 
+void algorithme_naif(Grille *G, Solution *S);
 
 #endif
