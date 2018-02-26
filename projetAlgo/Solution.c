@@ -86,34 +86,3 @@ void Lecture_Disque(char *filename, int *m, int *n, int *nbcoul, int *graine, So
   fclose(f);  
 }
 
-void PlusCourtChemin(Solution *S, int i, int j, int k,int l){
-
-  if(k-i>0){ //si la destination est a droite
-
-    Ajout_action(S, 'R');
-    return PlusCourtChemin(S,i+1,j,k,l);
-
-
-  }
-  else if(k-i<0){//si la destination est à gauche
-
-    Ajout_action(S,'L');
-    return PlusCourtChemin(S,i-1,j,k,l);
-
-  } 
-  else if(l-j>0){// si la destination est en bas
-        Ajout_action(S,'D');
-        return PlusCourtChemin(S,i,j-1,k,l);
-
-
-  }
-  else if(l-j<0){ //si la destination est en haut
-      Ajout_action(S,'U');
-      return PlusCourtChemin(S,i,j+1,k,l);
-
-
-  }
-  else return; //si on est arrivés
-
-}
-

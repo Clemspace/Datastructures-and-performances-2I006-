@@ -1,6 +1,9 @@
-all: Game_SortingRobot Checker_SortingRobot 
+all: Game_SortingRobot Checker_SortingRobot main
 
-exo.o: exo.c exo.h Grille.h Solution.h
+main.o : main.c exo.h
+	gcc -c main.c
+
+exo.o: exo.c exo.h Grille.h Solution.h API_AffGrille.h
 	gcc -c exo.c	
 
 entree_sortie.o: entree_sortie.c entree_sortie.h
@@ -18,6 +21,9 @@ API_AffGrille.o: API_AffGrille.c API_AffGrille.h Grille.h
 Game_SortingRobot.o: Game_SortingRobot.c Grille.h API_AffGrille.h Solution.h 
 	gcc -c Game_SortingRobot.c 
 
+main : main.o exo.o Grille.o API_AffGrille.o Solution.o entree_sortie.o
+	gcc -o main main.o exo.o Solution.o Grille.o API_AffGrille.o entree_sortie.o -lSDL
+	
 Game_SortingRobot: Game_SortingRobot.o API_AffGrille.o Grille.o Solution.o entree_sortie.o
 	gcc -o Game_SortingRobot Game_SortingRobot.o API_AffGrille.o Grille.o Solution.o entree_sortie.o -lSDL
 
@@ -28,4 +34,4 @@ Checker_SortingRobot: Checker_SortingRobot.o  API_AffGrille.o Grille.o Solution.
 	gcc -o Checker_SortingRobot Checker_SortingRobot.o  API_AffGrille.o Grille.o Solution.o entree_sortie.o -lSDL
 
 clean:
-	rm -f *.o Game_SortingRobot Checker_SortingRobot
+	rm -f *.o Game_SortingRobot Checker_SortingRobot main
