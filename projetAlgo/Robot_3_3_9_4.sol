@@ -1,2 +1,2 @@
 3 3 9 4
-S 0
+S R R D S L L U S S S S S S S S S S S S S S S S S S S S S 0

@@ -17,15 +17,14 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
 	int c;
   int i = 0;
   int j = 0;
-  int * k = malloc(sizeof(int));
-  int * l = malloc(sizeof(int));
+  int  k,l;
   fprintf(stderr, "dbg0\n");
 
 
   //cordonnées du robot dans (i,j)
 
    
-  while(G->cptr_noire< G->m*G->n){   
+  while(G->cptr_noire<10 /*G->m*G->n*/){   
         fprintf(stderr, "debut while  %d\n", G->cptr_noire);
 
 
@@ -35,20 +34,20 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
       fprintf(stderr, "dbg cases_correctes %d\n", G->cptr_noire);
       fprintf(stderr, "cordonnees_robot (%d,%d)\n", G->ir,G->jr);
 
-      RechercheCaseNaif_nn(G, G->ir, G->jr, k, l);//(k,l) a les coordonnées de la case la plus proche avec une piece
+      RechercheCaseNaif_nn(G, G->ir, G->jr, &k, &l);//(k,l) a les coordonnées de la case la plus proche avec une piece
     
-      changement_case(G, *k, *l);
+      changement_case(G, k, l);
      
       fprintf(stderr, "cordonnees_robotIJ (%d,%d)\n",i,j);
 
-      PlusCourtChemin(S, &i, &j, *k, *l);
+      PlusCourtChemin(S, G->ir, G->jr, k, l);
       fprintf(stderr, "cordonnees_robot (%d,%d)\n", G->ir,G->jr);
-      if (Case_est_Noire(G,G->ir,G->jr)){
-          RechercheCaseNaif_nn(G, G->ir, G->jr, k, l);//(k,l) a les coordonnées de la case la plus proche avec une piece
+      /*if (Case_est_Noire(G,G->ir,G->jr)){
+          RechercheCaseNaif_nn(G, G->ir, G->jr, &k, &l);//(k,l) a les coordonnées de la case la plus proche avec une piece
         
-          changement_case(G, *k, *l);
-          PlusCourtChemin(S, &i, &j, *k, *l);
-      }
+          changement_case(G, k, l);
+          PlusCourtChemin(S, i, j, k, l);
+      }*/
       swap_case(G);Ajout_action(S,'S');
 
       
@@ -61,20 +60,20 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
     
 
   
-    int c = G->T[G->ir][G->ir].robot; 
-    RechercheCaseNaif_c(G, c, G->ir, G->jr, k, l);//recherche la case cbile, cordonnées en(k,l)
-    fprintf(stderr, "main %d %d %d %d\n", i,j,*k,*l);
+    int c = G->T[G->ir][G->jr].robot; 
+    RechercheCaseNaif_c(G, c, G->ir, G->jr, &k, &l);//recherche la case cbile, cordonnées en(k,l)
+    fprintf(stderr, "main %d %d %d %d\n", G->ir,G->jr,k,l);
 
-    PlusCourtChemin(S, &i, &j, *k, *l);
-    changement_case(G, *k, *l);
+    PlusCourtChemin(S, G->ir, G->jr, k, l);
+    changement_case(G, k, l);
+    fprintf(stderr, "cordonnees_robotElse (%d,%d)\n", G->ir,G->jr); 
+
+
     swap_case(G);Ajout_action(S,'S');
+    G->cptr_noire++;  
 
     }
-    G->cptr_noire++;
-
   }
-  free(k);
-  free(l);
   return;
   
 }
@@ -86,15 +85,16 @@ void RechercheCaseNaif_c(Grille * G, int c, int i, int j, int * k, int * l){
   int min = G->m+G->n+1;
 
   fprintf(stderr, "RCNC %d %d %d %d couleur a trouver %d\n", i,j,*k,*l, c);
-  for (y = 0; y  < G->m; y++) //parcours du Tableau de cases
+  for (x = 0; x  < G->m; x++) //parcours du Tableau de cases
   {
-    for (x = 0; x < G->n; x++)
+    for (y = 0; y < G->n; y++)
     {
-        fprintf(stderr, "RCNC %d %d couleur:%d \n",x,y,G->T[x][y].fond);
+        fprintf(stderr, "RCNC %d %d couleur:%d \n",y,x,G->T[x][y].fond);
 
-      distance = (int)sqrt((x - i) * (x - i) + (y - j) * (y - j));
+      distance =(int)fabs(i-x)+fabs(j-y);
+ 
       if ( c==G->T[x][y].fond && distance < min){
-      fprintf(stderr, "RCNC_trouvé! (%d, %d) %d\n",x,y, distance);
+      fprintf(stderr, "RCNC_trouvé! (%d, %d) %d\n",y,x, distance);
 
         min =distance;
         *k= y;
@@ -117,13 +117,13 @@ void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
   
 
 
-  for (y = 0; y < G->m; y++) //parcours du Tableau de cases
+  for (x = 0; x < G->m; x++) //parcours du Tableau de cases
   {
-    for (x = 0; x < G->n; x++)
+    for (y = 0; y < G->n; y++)
     {
         fprintf(stderr, "RCNN  %d %d\n",x,y );
 
-      distance = (int)sqrt((x - i) * (x - i) + (y - j) * (y - j));
+      distance = (int)fabs(i-x)+fabs(j-y);
 
       if ((Case_est_Noire(G, x, y)==0)&& distance < min){
       fprintf(stderr, "RCNN_trouvé! (%d, %d) %d\n",x,y, distance);
@@ -149,18 +149,52 @@ int Case_est_Noire(Grille * G, int i, int j){
   return 0;
 }
 
-/*
+
 void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
- int x,y;
+  int x = (int)fabs(i-k);
+  int y = (int)fabs(j-l);
 
+  if(j==l && i==k ){//on est déja sur la bonne case
+    return;
+  }
+ 
+  if(i!=k){
+    int cpt;
+    if(i>k){//on doit aller a gauche 
+      for(cpt = 0; cpt<x;cpt++){
+        Ajout_action(S,'L');
+      }
+    }
+    if(i<k){//on doit aller a droite
+      for(cpt = 0; cpt<x;cpt++){
+        Ajout_action(S,'R');
 
+      }
+    }
 
+    }
+    
+    if(j!=l){
+    int cpt;
+    if(j>l){//on doit aller en bas 
+      for(cpt = 0; cpt<y;cpt++){
+        Ajout_action(S,'D');
+      }
+    }
+    if(j<l){//on doit aller en haut
+      for(cpt = 0; cpt<y;cpt++){
+        Ajout_action(S,'U');
+
+      }
+    }
+
+    }
+  return;
 }
-*/
 
 
 
-
+/*
 void PlusCourtChemin(Solution *S, int * i, int * j, int k,int l){
 
 fprintf(stderr, "PCC1 %d %d %d %d\n",*i,*j, k,l );
@@ -219,6 +253,7 @@ fprintf(stderr, "PCC1 %d %d %d %d\n",*i,*j, k,l );
   }
   return;
 }
+*/
 
 
 
