@@ -4,7 +4,7 @@ main.o : main.c exo.h
 	gcc -c main.c
 
 exo.o: exo.c exo.h Grille.h Solution.h API_AffGrille.h
-	gcc -c exo.c	
+	gcc -c -lm exo.c	
 
 entree_sortie.o: entree_sortie.c entree_sortie.h
 	gcc -c entree_sortie.c
@@ -22,7 +22,7 @@ Game_SortingRobot.o: Game_SortingRobot.c Grille.h API_AffGrille.h Solution.h
 	gcc -c Game_SortingRobot.c 
 
 main : main.o exo.o Grille.o API_AffGrille.o Solution.o entree_sortie.o
-	gcc -o main main.o exo.o Solution.o Grille.o API_AffGrille.o entree_sortie.o -lSDL
+	gcc -o  main main.o exo.o Solution.o Grille.o API_AffGrille.o entree_sortie.o -lSDL -lm
 	
 Game_SortingRobot: Game_SortingRobot.o API_AffGrille.o Grille.o Solution.o entree_sortie.o
 	gcc -o Game_SortingRobot Game_SortingRobot.o API_AffGrille.o Grille.o Solution.o entree_sortie.o -lSDL

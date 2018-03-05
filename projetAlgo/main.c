@@ -43,9 +43,10 @@ int main(int argc,char**argv){
   Solution_init(&S);
 
 
+  
 
   algorithme_naif(&G, &S);//ecrit la solution dans S
-
+  
   Ecriture_Disque(G.m, G.n, G.nbcoul, graine, &S);//ficher .sol
 
 	Affiche(&S);
