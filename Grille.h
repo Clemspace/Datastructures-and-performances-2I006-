@@ -52,5 +52,4 @@ void changement_case(Grille *G, int i, int j);
 // sur la case courante
 void swap_case(Grille *G);
 
-
 #endif

@@ -34,4 +34,4 @@ Checker_SortingRobot: Checker_SortingRobot.o  API_AffGrille.o Grille.o Solution.
 	gcc -o Checker_SortingRobot Checker_SortingRobot.o  API_AffGrille.o Grille.o Solution.o entree_sortie.o -lSDL
 
 clean:
-	rm -f *.o Game_SortingRobot Checker_SortingRobot main
+	rm -f *.o *.sol Game_SortingRobot Checker_SortingRobot main

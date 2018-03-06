@@ -85,4 +85,3 @@ void Lecture_Disque(char *filename, int *m, int *n, int *nbcoul, int *graine, So
   
   fclose(f);  
 }
-
