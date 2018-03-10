@@ -30,6 +30,9 @@ void Affiche(Solution *S);
 // Ecriture de la solution dans un fichier
 void Ecriture_Disque(int m, int n, int nbcoul, int graine, Solution *S);
 
+void Ecriture_Disque3(int m, int n, int nbcoul, int graine, Solution *S);
+
+
 // Lecture d'une solution a partir d'un fichier
 // La solution doit avoir ete initialisee auparavant
 void Lecture_Disque(char *filename, int *m, int *n, int *nbcoul, int *graine, Solution *S);

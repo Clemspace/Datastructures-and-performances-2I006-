@@ -19,13 +19,5 @@ int Case_est_Noire(Grille * G, int i, int j);//retourne 1 si la case est noire, 
 void algorithme_naif(Grille *G, Solution *S);
 
 
-//exo 2
-void RechercheCirculaire_c(Grille * G, int c, int i, int j, int * k, int * l);
-
-void RechercheCirculaire_nn(Grille * G,  int i, int j, int * k, int * l);
-
-void algorithme_circulaire(Grille *G, Solution *S);
-
-
 
 #endif

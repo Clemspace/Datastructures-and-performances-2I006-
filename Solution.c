@@ -69,6 +69,37 @@ void Ecriture_Disque(int m, int n, int nbcoul, int graine, Solution *S){
   fclose(f);
 }
 
+void Ecriture_Disque3(int m, int n, int nbcoul, int graine, Solution *S){
+  char filename[104];
+  char inttochar[6];
+  
+  strcpy(filename,"LDCRobot_");
+  sprintf(inttochar,"%d",m);
+  strcat(filename,inttochar);
+  strcat(filename,"_");
+  sprintf(inttochar,"%d",n);
+  strcat(filename,inttochar);
+  strcat(filename,"_");
+  sprintf(inttochar,"%d",nbcoul);
+  strcat(filename,inttochar);
+  strcat(filename,"_");
+  sprintf(inttochar,"%d",graine);
+  strcat(filename,inttochar);
+  strcat(filename,".sol");
+
+  FILE *f=fopen(filename,"w");
+  fprintf(f,"%d %d %d %d\n", m, n, nbcoul, graine);
+
+  Cell_char *cour=S->prem;
+  while (cour!=NULL){
+    fprintf(f,"%c ",cour->a);
+    cour=cour->suiv;
+  }
+  fprintf(f,"0\n");
+
+  fclose(f);
+}
+
 void Lecture_Disque(char *filename, int *m, int *n, int *nbcoul, int *graine, Solution *S){
   char c;
   FILE* f=fopen(filename,"r");

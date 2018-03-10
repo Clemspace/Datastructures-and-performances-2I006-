@@ -1,3 +1,4 @@
+#define GRILLE  G->m*G->n; 
 #include "Grille.h"
 #include <stdlib.h>
 #include <stdio.h>

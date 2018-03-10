@@ -6,6 +6,7 @@
 #include "Solution.h"
 #include "API_AffGrille.h"
 #include "exo.h"
+#include "LDC.h"
 
 
 
@@ -43,11 +44,11 @@ int main(int argc,char**argv){
   Solution_init(&S);
 
 
-  
 
-  algorithme_naif(&G, &S);//ecrit la solution dans S
+  algorithme_parcouleur(&G, &S);
+
   
-  Ecriture_Disque(G.m, G.n, G.nbcoul, graine, &S);//ficher .sol
+  Ecriture_Disque3(G.m, G.n, G.nbcoul, graine, &S);//ficher .sol
 
 	Affiche(&S);
   
@@ -56,4 +57,3 @@ int main(int argc,char**argv){
 
 return 0;
 }
-
