@@ -26,10 +26,11 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
    
   while(G->cptr_noire<G->m*G->n){   
     fprintf(stderr, "\ndebut while  %d\n", G->cptr_noire);
-    int c = G->T[G->ir][G->jr].robot; 
+    
+    int PieceRobot = G->T[G->ir][G->jr].robot; 
 
 
-    if(G->T[G->ir][G->jr].robot==-1){//si le robot n'a pas de pièce
+    if(PieceRobot == -1){//si le robot n'a pas de pièce
       
       fprintf(stderr, "va chercher case avec piece %d COULEUR robot: %d\n", G->cptr_noire, G->T[G->ir][G->jr].robot);
 
@@ -62,7 +63,7 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
         
 
       
-        //int c = G->T[G->ir][G->jr].robot; 
+        int c = G->T[G->ir][G->jr].robot; 
         RechercheCaseNaif_c(G, c, G->ir, G->jr, &k, &l);//recherche la case cbile, cordonnées en(k,l)
         fprintf(stderr, "main %d %d %d %d\n", G->ir,G->jr,k,l);
 
@@ -140,6 +141,7 @@ void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
         *k=x;
         *l=y;
       } 
+      if(min==0)return;
 
 
     }
@@ -168,16 +170,16 @@ void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
  
   if(i!=k){
     int cpt = 0;
-    if(i>k){//on doit aller a gauche 
+    if(i>k){//on doit aller en haut
       for(cpt = 0; cpt<x;cpt++){
-        fprintf(stderr, "PCCGauche %d %d %d %d %d\n",i,j, k,l, cpt );
+        fprintf(stderr, "PCCHaut %d %d %d %d %d\n",i,j, k,l, cpt );
 
         Ajout_action(S,'U');
       }
     }
-    if(i<k){//on doit aller a droite
+    if(i<k){//on doit aller en bas
       for(cpt = 0; cpt<x;cpt++){
-        fprintf(stderr, "PCCDroite %d %d %d %d %d\n",i,j, k,l, cpt );
+        fprintf(stderr, "PCCBas %d %d %d %d %d\n",i,j, k,l, cpt );
 
 
         Ajout_action(S,'D');
@@ -190,18 +192,18 @@ void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
     if(j!=l){
     int cpt2 = 0;
     
-    if(j>l){//on doit aller en bas 
+    if(j>l){//on doit aller a gauche
       for(cpt2 = 0; cpt2<y;cpt2++){
-        fprintf(stderr, "PCCBas %d %d %d %d %d\n",i,j, k,l, cpt2 );
+        fprintf(stderr, "PCCGauche %d %d %d %d %d\n",i,j, k,l, cpt2 );
 
 
         Ajout_action(S,'L');
       }
     }
 
-    if(j<l){//on doit aller en haut
+    if(j<l){//on doit aller a droite
       for(cpt2 = 0; cpt2<y;cpt2++){
-        fprintf(stderr, "PCCHaut %d %d %d %d %d\n",i,j, k,l, cpt2 );
+        fprintf(stderr, "PCCDroite %d %d %d %d %d\n",i,j, k,l, cpt2 );
 
 
         Ajout_action(S,'R');

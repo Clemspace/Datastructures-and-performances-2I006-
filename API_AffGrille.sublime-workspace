@@ -1,0 +1,412 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pre",
+				"premier"
+			],
+			[
+				"T",
+				"TC"
+			],
+			[
+				"L",
+				"LDCafficher"
+			],
+			[
+				"n",
+				"nbcoul"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"j",
+				"j"
+			],
+			[
+				"Ldc",
+				"LDCInsererEnFin"
+			],
+			[
+				"c",
+				"creerCellule"
+			],
+			[
+				"Ha",
+				"HashTableInitialise"
+			],
+			[
+				"lDC",
+				"LDCInitialise"
+			],
+			[
+				"si",
+				"sizeof"
+			],
+			[
+				"C",
+				"Checker_SortingRobot"
+			],
+			[
+				"LDC",
+				"ldc"
+			],
+			[
+				"Cell",
+				"CelluleLDC"
+			],
+			[
+				"Ce",
+				"CelluleLDC"
+			],
+			[
+				"y",
+				"y"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"cpt",
+				"cptr_noire"
+			],
+			[
+				"case",
+				"Case_est_Noire"
+			],
+			[
+				"k",
+				"k"
+			],
+			[
+				"pl",
+				"PlusCourtChemin"
+			],
+			[
+				"rec",
+				"RechercheCeCaseNaif_c"
+			],
+			[
+				"pi",
+				"plivre"
+			],
+			[
+				"f",
+				"fonctionHachage"
+			],
+			[
+				"aj",
+				"ajout_Livre"
+			],
+			[
+				"li",
+				"livreAc"
+			],
+			[
+				"livre",
+				"livreAc"
+			],
+			[
+				"B",
+				"Biblio"
+			],
+			[
+				"str",
+				"strcmp"
+			],
+			[
+				"supp",
+				"supprimer_HLivre"
+			],
+			[
+				"t",
+				"T"
+			],
+			[
+				"l",
+				"h_livre"
+			],
+			[
+				"h",
+				"h_livre"
+			],
+			[
+				"ajout",
+				"ajout_HLivre"
+			],
+			[
+				"fonct",
+				"fonctionClef"
+			],
+			[
+				"num",
+				"numero"
+			],
+			[
+				"nu",
+				"numero"
+			],
+			[
+				"s",
+				"s"
+			],
+			[
+				"table",
+				"tableHachage_t"
+			],
+			[
+				"hash",
+				"hashT"
+			],
+			[
+				"titre",
+				"titre"
+			],
+			[
+				"cree",
+				"creer_Livre"
+			],
+			[
+				"ini",
+				"initialise_biblio"
+			],
+			[
+				"nl",
+				"nbliv"
+			],
+			[
+				"biblio",
+				"biblio"
+			],
+			[
+				"a",
+				"a"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Checker_SortingRobot.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Solution.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/main.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Grille.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Grille.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Game_SortingRobot.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/exo.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Makefile",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Solution.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/main3.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/LDC.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/LDC.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/entree_sortie.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/exo.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/API_AffGrille.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/main_reso.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/main2.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Robot_100_100_1000_1.sol",
+		"/home/clemspace/Documents/2I006/Mini-Projet/hash.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/API_AffGrille.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/exo_1.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/ProjetAlgoMajoration-master/projetAlgo/Projet_SortingRobot_V2.pdf",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Solution.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Solution.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/main_reso.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Checker_SortingRobot.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Game_SortingRobot.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Makefile",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Grille.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/exo.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Grille.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/entree_sortie.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/exo_1.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/exo_1.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/API_AffGrille.c",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/entree_sortie.h",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/Game_SortingRobot.o",
+		"/home/clemspace/Documents/2I006/ProjetRobots/projetAlgo/API_AffGrille.h",
+		"/home/clemspace/Documents/2I006/projet Algo/Grille.c",
+		"/home/clemspace/Documents/2I006/projet Algo/Solution.h",
+		"/home/clemspace/Documents/2I006/projet Algo/Solution.c",
+		"/home/clemspace/Documents/2I006/projet Algo/Makefile",
+		"/home/clemspace/Documents/2I006/projet Algo/Grille.h",
+		"/home/clemspace/Documents/2I006/projet Algo/Game_SortingRobot.c",
+		"/home/clemspace/Documents/2I006/projet Algo/entree_sortie.h",
+		"/home/clemspace/Documents/2I006/projet Algo/entree_sortie.c",
+		"/home/clemspace/Documents/2I006/projet Algo/Checker_SortingRobot.c",
+		"/home/clemspace/Documents/2I006/projet Algo/API_AffGrille.h",
+		"/home/clemspace/Documents/2I006/projet Algo/API_AffGrille.c",
+		"/home/clemspace/Documents/2I006/Mini-Projet/hash.h",
+		"/home/clemspace/Documents/2I006/Mini-Projet/livre.h",
+		"/home/clemspace/Documents/2I006/Mini-Projet/main2.c",
+		"/home/clemspace/Documents/2I006/Mini-Projet/makefile",
+		"/home/clemspace/Documents/2I006/Mini-Projet/main.c",
+		"/home/clemspace/Documents/2I006/Mini-Projet/livre.c",
+		"/home/clemspace/Documents/2I006/Mini-Projet/entree_sortie.h",
+		"/home/clemspace/Documents/2I006/Mini-Projet/entree_sortie.c",
+		"/home/clemspace/Documents/2I006/Mini-Projet/GdeBiblio.txt",
+		"/home/clemspace/Téléchargements/ddd_exo1.c",
+		"/home/clemspace/Téléchargements/ddd_exo2.c",
+		"/home/clemspace/Documents/2I006/TME1/tme1.c",
+		"/home/clemspace/Documents/2I001/S8-11/arbre_lexicographique.c",
+		"/home/clemspace/Documents/2I001/S8-11/main_arbre.c",
+		"/home/clemspace/Documents/DIrection.java"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "API_AffGrille.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

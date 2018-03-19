@@ -1,7 +1,7 @@
 
 
 CC = gcc
-CFLAGS = -W -ggdb
+CFLAGS = -W -ggdb -g
 LDFLAGS= -lSDL -lm
 EXEC= Game_SortingRobot Checker_SortingRobot main main2 main3
 SRC= $(wildcard *.c)

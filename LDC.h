@@ -29,7 +29,7 @@ CelluleLDC * dernier;	/* Pointeur sur element en fin */
 
 typedef struct {
 	
-	LDC * TC; 			//Tableau de Listes cirulaires
+	LDC ** TC; 			//Tableau de Listes cirulaires
 	int nbcoul;		// nb de couleurs dans la grille et de cases de la table de hachage;
 
 }HashTable;
@@ -45,6 +45,8 @@ void LDCInsererEnFin(LDC * ldc , int i,int j);	//qui insere une nouvelle cellule
 void LDCenleverCellule(LDC * ldc , CelluleLDC * cel);	// qui supprime une cellule a partir d un pointeur sur la cellule
 
 void LDCafficher(LDC * ldc);		// un affichage en cas de besoin pour debugage
+
+void AfficherTable(HashTable * H);
 
 void LDCdesalloue(LDC * ldc);	// qui desalloue toute la liste (si elle n est pas vide a la fin)
 
