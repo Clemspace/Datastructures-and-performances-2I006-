@@ -17,7 +17,7 @@ void LDCInitialise(LDC *ldc){// qui initialise une liste
 	return;
 }
 int LDCVide(LDC* ldc){	// qui teste si la liste est vide, retourne 1 si vide, 0 sinon
-	return ldc->premier == NULL ?  1 : 0;
+	return ldc->premier == NULL;
 }
 
 
@@ -41,7 +41,15 @@ void LDCInsererEnFin(LDC* ldc , int i,int j){	//qui insere une nouvelle cellule 
 
 void LDCenleverCellule(LDC* ldc , CelluleLDC * cel){// qui supprime une cellule a partir d un pointeur sur la cellule
 	
-	if(cel->prec == NULL){// si premier elem de LDC
+
+	fprintf(stderr, "On enleve la cellule de coordonnees (%d,%d)\n",cel->i,cel->j);
+	if (ldc->premier ==ldc->dernier){//si on supprime le dernier élément de la ldc
+		free(cel);
+		ldc->premier = NULL;
+		ldc->dernier = NULL;
+
+	}
+	else if(cel->prec == NULL){// si premier elem de LDC
 		
 		cel->suiv->prec = NULL;
 		ldc->premier = cel->suiv; 
@@ -82,9 +90,10 @@ void LDCafficher(LDC* ldc){// un affichage en cas de besoin pour debugage
 void AfficherTable(HashTable * H){
 
 	int i;
+			printf("||||||Affichage de la Table||||||\n");
+
 	for (i = 0; i < H->nbcoul; i++)//on parcourt le tableau de cases et on met dans la table de hachage les coordonnées en fonction de la couleur de leur fond
 	{
-		printf("||||||Affichage de la Table||||||\n");
 		printf("%d ème case de la Table:\n",i);
 		LDCafficher(H->TC[i]);
 	}
@@ -203,6 +212,7 @@ void algorithme_parcouleur(Grille *G, Solution *S){
 	while(G->cptr_noire<G->m*G->n){   
 
 		if(G->T[G->ir][G->jr].robot==-1){//si le robot n'a pas de pièce
+			fprintf(stderr, "DébutIF\n" );
 
 
 			RechercheCaseNaif_nn(G, G->ir,G->jr, &k, &l);//(k,l) a les coordonnées de la case la plus proche avec une piece
@@ -210,9 +220,11 @@ void algorithme_parcouleur(Grille *G, Solution *S){
 
 	    	changement_case(G, k, l);
 	    	swap_case(G);Ajout_action(S,'S');
+			fprintf(stderr, "FinIF\n" );
  
 		}
 		else{//si le robot a une pièce
+			fprintf(stderr, "DébutELSE\n" );
 
 	        int c = G->T[G->ir][G->jr].robot; 
 	        fprintf(stderr, "%d,%d\n", k,l);
@@ -226,8 +238,11 @@ void algorithme_parcouleur(Grille *G, Solution *S){
 	        changement_case(G, k, l);
 
 	        swap_case(G);Ajout_action(S,'S');
+	        
 	        LDCenleverCellule(H->TC[c], cell);
 	        LDCafficher(H->TC[c]);
+	        fprintf(stderr, "FinELSE\n" );
+
 
     	}
 	
