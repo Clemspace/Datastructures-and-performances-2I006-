@@ -1,55 +1,107 @@
 #include "exo4.h"
+#define max(a,b) (a>=b?a:b)
 
 /*EXO4*/
-typedef struct s_avlEqui{
-  int entier;
-  int hauteur;
-
-  struct s_avlEqui * fd;
-  struct s_avlEqui * fg;
-}AVL;
 
 
-//inicialiser un tableau de taille c*i
-AVL** initTab(Grille *G){
-  int j;
+//inicialiser un tableau de tableau(matrice) d'AVL de taille nbre couleurs *nbre lignes
+
+
+
+AVL*** initTab(Grille *G){
+  int k,j;
   
   int c = G->nbcoul; //nbre couleurs
   int i= G->m ;//nombre de lignes 
 
-  AVL** tab=(AVL**)malloc(i*sizeof(AVL*));
+  AVL*** tab=(AVL***)malloc(c*sizeof(AVL**));
+
+
   for(j=0;j<i;j++){
-    tab[i]=(AVL*)malloc(c*sizeof(AVL));
-  } 
-  
+    (tab)[j]=(AVL**)malloc (sizeof(AVL*));
+  }
+ 
+    
   return tab;
 }
 
 
-//trouver tous les j tq la case(i,j) contient la couleur c et les stoque dans un tableau 
-int* trouverJ(Grille* G, int c){
-  int *tabj=(int *) malloc(sizeof(int)* (G->m)*(G->n));
-  int a,b,cpt=0;
-
-  for(a=0 ; a<(G->m) ; a++){
-    for(b=0 ; b<(G->n) ; b++){
-      if(G->T[a][b].piece == c){//si sur case (a,b)contient une piece de couleur c
-	tabj[cpt]=b;//contient j qu'on cherche
-	cpt++;
-      }
-    }
-  }
-			   
-  return tabj;
-}
 
 
 
 //trouver tous les j tq la case(i,j) contient la couleur c ( et les on stoque dans un AVL)
 
+AVL* trouverJAVL(Grille* G,int c,int i){
+  AVL * res = NULL;
+  int b;
 
 
-//utilise la fonction precedente pour construire le tableau M[c][i]
+    for(b=0 ; b<(G->n) ; b++){ //parcours la grille
+
+      if(G->T[b][i].piece == c){//si sur la case (a,b) contient une piece de couleur c
+	inserer_avec_equi(res, b);//inserer j dans l'AVL
+    }
+
+      
+  }
+			   
+  return res;
+
+}
+
+//Q4.3 : utilise la fonction precedente pour construire le tableau M[c][i]
+AVL *** tableauCI(Grille * G){
+  
+  int c = G->nbcoul; //nbre couleurs
+  int i= G->m ;//nombre de lignes
+
+  int k,h;
+  
+  AVL *** M =initTab(G);// M[c][i]= un pointeur vers un AVL contenant tout les j tq (i,j) contient une piece de couleur c
+
+  for(k=0;k<c;k++){//k=c
+    for(h=0;h<i;h++){//h=i    parcour le tableau
+      M[k][h]=trouverJAVL(G,k,h); //k est la couleur
+    }
+  }
+  
+  
+  return M;
+}
+
+
+
+//Q4.4 : methode indiquant dans M[c][i] la case la plus proche d'une case (k,l) donnée 
+
+
+int Case_plus_proche(Grille * G,AVL *arb, int j ,int min){
+
+  
+  int distance = abs(j-arb->entier);
+  int minJ=G->n;
+
+  if(!arb)return minJ;
+  
+  if(abs(distance) < min){
+      min = abs(j-arb->entier);
+      minJ = arb->entier;
+  }
+
+  if(arb->entier == j){
+      return j;
+  }
+
+  if(arb->entier < j){
+    Case_plus_proche(G,arb->fd,j,min);
+  }
+  if(arb->entier > j){
+    Case_plus_proche(G,arb->fg,j,min);
+  }
+
+  printf("ERREUr");
+  return;
+
+}
 
 
 
@@ -59,10 +111,18 @@ int* trouverJ(Grille* G, int c){
 
 
 
-/*fonction utile pour manipuler les AVL*/
+
+
+
+
+
+
+
+
+/*fonctions utilse pour manipuler les AVL*/
 
 //creer un noeud 
-AVL* creeN(int val,AVL* fd,AVL*fg){
+AVL* creeN(int val,AVL* fd,AVL*fg) {
   AVL * n=(AVL*) malloc(sizeof(AVL));
 
   n->entier=val;
