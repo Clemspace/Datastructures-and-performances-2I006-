@@ -74,11 +74,12 @@ AVL *** tableauCI(Grille * G){
 //Q4.4 : methode indiquant dans M[c][i] la case la plus proche d'une case (k,l) donnée 
 
 
-int Case_plus_proche(Grille * G,AVL *arb, int j ,int min){
+int j_plus_proche(Grille * G,AVL *arb, int j ){
 
   
   int distance = abs(j-arb->entier);
   int minJ=G->n;
+  int min=0;
 
   if(!arb)return minJ;
   
@@ -92,10 +93,10 @@ int Case_plus_proche(Grille * G,AVL *arb, int j ,int min){
   }
 
   if(arb->entier < j){
-    Case_plus_proche(G,arb->fd,j,min);
+    j_plus_proche(G,arb->fd,j);
   }
   if(arb->entier > j){
-    Case_plus_proche(G,arb->fg,j,min);
+    j_plus_proche(G,arb->fg,j);
   }
 
   printf("ERREUr");
@@ -104,7 +105,73 @@ int Case_plus_proche(Grille * G,AVL *arb, int j ,int min){
 }
 
 
+void case_plus_proche_c(Grille * G, AVL *** M, int c, int i, int j , int *k, int *l){//cherche la case la plus proche de (i,j) qui possede une piece de couleur c et on met dans (k,l)
+  int ligne;
+  int minJ=G->n;
+  int tmp;
+  for(ligne=0;ligne<(G->n) ;ligne++){
 
+    tmp= j_plus_proche(G, M[c][i], j );
+    if(tmp<minJ){
+      minJ=tmp;
+    }
+  }
+
+  k=&ligne;
+  l=&minJ;
+  
+
+} 
+
+
+
+
+void algorithme_AVL(Grille *G, Solution *S){
+  
+  AVL *** M =initTab(G);
+
+  int taille= G->m*G->n;
+  int i,j;
+  int k = 0;
+  int l = 0;
+
+
+  while(G->cptr_noire<G->m*G->n){   
+
+    if(G->T[G->ir][G->jr].robot==-1){//si le robot n'a pas de pièce
+      fprintf(stderr, "DébutIF\n" );
+
+      RechercheCaseNaif_nn(G, G->ir,G->jr, &k, &l);//(k,l) a les coordonnées de la case la plus proche avec une piece
+      PlusCourtChemin(S, G->ir, G->jr, k, l);
+      
+      changement_case(G, k, l);
+      swap_case(G);Ajout_action(S,'S');
+      fprintf(stderr, "FinIF\n" );
+    }
+    
+    else{//si le robot a une pièce
+      fprintf(stderr, "DébutELSE\n" );
+
+      int c = G->T[G->ir][G->jr].robot; 
+      fprintf(stderr, "%d,%d\n", k,l);
+
+      //on utilise AVL pour chercher la case la plus proche avec une piece de couleur c
+      case_plus_proche_c(G, M, c, G->ir,G->jr, &k, &l);
+      //(k,l) a les coordonnées de la case la plus proche avec une piece
+
+      PlusCourtChemin(S, G->ir, G->jr, k, l);
+      changement_case(G, k, l);
+
+      swap_case(G);Ajout_action(S,'S');
+	        
+      fprintf(stderr, "FinELSE\n" );
+
+
+    }
+
+  }
+
+}
 
 
 
