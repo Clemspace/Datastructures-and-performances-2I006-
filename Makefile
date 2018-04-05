@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -W -ggdb -g
 LDFLAGS= -lSDL -lm
-EXEC= Game_SortingRobot Checker_SortingRobot main main2 main3
+EXEC= Game_SortingRobot Checker_SortingRobot main main2 main3 main4 main_console
 SRC= $(wildcard *.c)
 OBJ= $(SRC:.c=.o)
 
@@ -14,6 +14,12 @@ all: $(EXEC)
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
+
+main_console : main_console.o exo.o LDC.o exo4.o API_AffGrille.o Grille.o Solution.o entree_sortie.o 
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+main4: main4.o exo4.o exo.o API_AffGrille.o Grille.o Solution.o entree_sortie.o 
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 main3: main3.o LDC.o exo.o API_AffGrille.o Grille.o Solution.o entree_sortie.o 
 	$(CC) -o $@ $^ $(LDFLAGS)
@@ -34,4 +40,4 @@ Checker_SortingRobot: Checker_SortingRobot.o  API_AffGrille.o Grille.o Solution.
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -f *.o  $(EXEC)
+	rm -f *.o *.sol $(EXEC)

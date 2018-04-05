@@ -26,11 +26,10 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
    
   while(G->cptr_noire<G->m*G->n){   
     fprintf(stderr, "\ndebut while  %d\n", G->cptr_noire);
-    
-    int PieceRobot = G->T[G->ir][G->jr].robot; 
+    int c = G->T[G->ir][G->jr].robot; 
 
 
-    if(PieceRobot == -1){//si le robot n'a pas de pièce
+    if(G->T[G->ir][G->jr].robot==-1){//si le robot n'a pas de pièce
       
       fprintf(stderr, "va chercher case avec piece %d COULEUR robot: %d\n", G->cptr_noire, G->T[G->ir][G->jr].robot);
 
@@ -63,7 +62,7 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
         
 
       
-        int c = G->T[G->ir][G->jr].robot; 
+        //int c = G->T[G->ir][G->jr].robot; 
         RechercheCaseNaif_c(G, c, G->ir, G->jr, &k, &l);//recherche la case cbile, cordonnées en(k,l)
         fprintf(stderr, "main %d %d %d %d\n", G->ir,G->jr,k,l);
 
@@ -73,6 +72,7 @@ void algorithme_naif(Grille *G, Solution *S){/*pour chaque case, on recherche ,s
 
 
         swap_case(G);Ajout_action(S,'S');
+
       }
 
 
@@ -141,7 +141,6 @@ void RechercheCaseNaif_nn(Grille *G, int i, int j, int *k, int *l){
         *k=x;
         *l=y;
       } 
-      if(min==0)return;
 
 
     }
@@ -170,16 +169,16 @@ void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
  
   if(i!=k){
     int cpt = 0;
-    if(i>k){//on doit aller en haut
+    if(i>k){//on doit aller a gauche 
       for(cpt = 0; cpt<x;cpt++){
-        fprintf(stderr, "PCCHaut %d %d %d %d %d\n",i,j, k,l, cpt );
+        fprintf(stderr, "PCCGauche %d %d %d %d %d\n",i,j, k,l, cpt );
 
         Ajout_action(S,'U');
       }
     }
-    if(i<k){//on doit aller en bas
+    if(i<k){//on doit aller a droite
       for(cpt = 0; cpt<x;cpt++){
-        fprintf(stderr, "PCCBas %d %d %d %d %d\n",i,j, k,l, cpt );
+        fprintf(stderr, "PCCDroite %d %d %d %d %d\n",i,j, k,l, cpt );
 
 
         Ajout_action(S,'D');
@@ -192,18 +191,18 @@ void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
     if(j!=l){
     int cpt2 = 0;
     
-    if(j>l){//on doit aller a gauche
+    if(j>l){//on doit aller en bas 
       for(cpt2 = 0; cpt2<y;cpt2++){
-        fprintf(stderr, "PCCGauche %d %d %d %d %d\n",i,j, k,l, cpt2 );
+        fprintf(stderr, "PCCBas %d %d %d %d %d\n",i,j, k,l, cpt2 );
 
 
         Ajout_action(S,'L');
       }
     }
 
-    if(j<l){//on doit aller a droite
+    if(j<l){//on doit aller en haut
       for(cpt2 = 0; cpt2<y;cpt2++){
-        fprintf(stderr, "PCCDroite %d %d %d %d %d\n",i,j, k,l, cpt2 );
+        fprintf(stderr, "PCCHaut %d %d %d %d %d\n",i,j, k,l, cpt2 );
 
 
         Ajout_action(S,'R');
@@ -212,275 +211,218 @@ void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
     }
 
     }
-  return;
+    return;
 }
+
+
+
 
 
 
 /*EXO 2 recherche circulaire*/
 
+int EstDansGrille(Grille* G, int i,int j){//si (i,j) est dans G
+	if( (i<(G->m)) && i>=0 && (j<(G->n)) && j>=0){
+		return 1;
+	}else{ 
+		return 0;
+	}
+}
+
+int PieceEgaleFond(Grille * G , int i,int j,int c){
+	if(G->T[i][j].fond == c){
+		return 1;
+	}else{
+		return 0;
+	}
+
+}
+
+
+int ExistePiece(Grille *G, int i,int j){
+	if(G->T[i][j].piece != (-1) ){
+		return 1;	
+	}else{
+		return 0;
+	}
+}
 
 
 
 void RechercheCirculaire_c(Grille * G, int c, int i, int j, int * k, int * l){
 
-  int i2,lg,ld,r;
-  int L=max( fabs( (G->n)-i ) , fabs( (G->m)-j ) );
+  int i2,lg,ld;
+  int L=1;
+  int max = G->m + G->n ;
 
- 
+  printf("Debut robot se trouve : (%d, %d)\n",i,j);
+	
 
-  for ( r=1 ; r<=L ; r++){ //tous les valeurs possible de la case a trouver et (i,j)
-  
-    i2=i-r;
+
+  while(L< max){
     lg=j;
     ld=j;
 
-    while(i2<=i){//case a distance r de (i,j) qui sont gauche de (i,j)
-
-      if(i2>=0 && lg>=0 && i2<(G->n) && lg<(G->m) ){//si case dans le tableau on verifie si il y a c
-        if( c==G->T[i2][lg].fond && Case_est_Noire(G, i2, lg)==0){ //Si la case (i2,lg) est de la même couleur que c, et n'est pas noire
-	  *k=i2;*l=lg;
-
-	  fprintf(stderr, "trouve!\n");
-	  return ;
-	}
-      }
-
-      if(i2>=0 && ld>=0 && i2<(G->n) && ld<(G->m) ){//idem
-        if( c==G->T[i2][ld].fond && Case_est_Noire(G, i2, ld)==0){
-	  *k=i2;*l=ld;
-
-	  fprintf(stderr, "trouve!\n");
-	  return ;
-	}
-      }
-  
-      i2++;
-      lg=lg-1;
-      ld=ld+1;
-
-    
-    }//fin While
-
-
-
-    
-    i2=i+1;
-    lg=j-L+1;
-    ld=j+L-1;
-
-    while(i2<=i+r){ //case a distance r de (i,j) qui sont droite de (i,j)
+    for(i2=i-L; i2<=i ; i2++){
       
-      if(i2>=0 && lg>=0 && i2<(G->n) && lg<(G->m) ){//si case dans le tableau on verifie si il y a c
-        if( c==G->T[i2][lg].fond && Case_est_Noire(G, i2, lg)==0){ //Si la case (i2,lg) est de la même couleur que c, et n'est pas noire
-	  *k=i2;*l=lg;
-
-	  fprintf(stderr, "trouve!\n");
+      if( EstDansGrille(G, i2, lg) && PieceEgaleFond(G, i2, lg, c) && (!Case_est_Noire(G, i2, lg))  ){
+	  *k=i2;
+	  *l=lg;
+	  printf("Piece trouvé gauche lg: (%d, %d)\n",*k,*l);
 	  return ;
 	}
-      }
-
-      if(i2>=0 && ld>=0 && i2<(G->n) && ld<(G->m) ){//idem
-        if( c==G->T[i2][ld].fond && Case_est_Noire(G, i2, ld)==0){
-	  *k=i2;*l=ld;
-
-	  fprintf(stderr, "trouve!\n");
+     
+	    
+      if( EstDansGrille(G, i2, ld) && PieceEgaleFond(G, i2, ld, c) && (!Case_est_Noire(G, i2, ld) )  ){
+	  *k=i2;
+	  *l=ld;
+	  printf("Piece trouvé gauche ld: (%d, %d)\n",*k,*l);
 	  return ;
-	}
       }
+
+      lg = lg - 1;
+      ld = ld + 1;
+      
+    }//fin for
+
+
+
+    lg = j-L+1;
+    ld = j+L-1;
+
+    for (i2=i+1;i2<=i+L;i++){
+
+      if(EstDansGrille(G, i2, lg) && PieceEgaleFond(G, i2, lg, c) && (!Case_est_Noire(G, i2, lg)) ){ 
+	  *k=i2;
+	  *l=lg;
+	  printf("Piece trouvé droite lg: (%d, %d)\n",*k,*l);
+	  return ;
+      }
+
+      if(EstDansGrille(G, i2, ld) && PieceEgaleFond(G, i2, ld, c) && (!Case_est_Noire(G, i2, ld))){
+	  *k=i2;
+	  *l=ld;
+	  printf("Piece trouvé droite ld: (%d, %d)\n",*k,*l);
+	  return ;
+      }
+
+      lg = lg + 1;
+      ld = ld - 1;
+    }//fin for
+
+    L++;
+
     
-      i2++;
-      lg=lg+1;
-      ld=ld-1;
+  }//fin while
 
-    }//Fin While
-  
 
-  }//Fin For
-
-  //si pas trouver
-  return;
-
+  printf("Pas trouver de piece.\n\n");
 }
+
+
+
+
+
+
 
 
 
 
 void RechercheCirculaire_nn(Grille * G,  int i, int j, int * k, int * l){
 
-  int i2,lg,ld,r;
-  int L=max( fabs( (G->n)-i ) , fabs( (G->m)-j ) ); //plus grand valeur 
 
- 
+  int i2,lg,ld;
+  int L=0;
+  int max = G->m + G->n ;
 
-  for ( r=1 ; r<=L ; r++){ //tous les valeurs possible de la case a trouver et (i,j)
-  
-    i2=i-r;
+  printf("Debut robot se trouve : (%d, %d)\n",i,j);
+    
+
+  while(L<max){
     lg=j;
     ld=j;
 
-    while(i2<=i){//case a distance r de (i,j) qui sont gauche de (i,j)
-
-      if(i2>=0 && lg>=0 && i2<(G->n) && lg<(G->m) ){//si case est dans le tableau
-	if( G->T[i2][lg].piece >=0 && Case_est_Noire(G, i2, lg)==0){ //Si la case (k,l) contient une pièce et n'est pas noire 
+    for(i2=i-L; i2<=i ; i2++){
+      
+      if( EstDansGrille(G, i2, lg) && ExistePiece(G, i2, lg) && (!Case_est_Noire(G, i2, lg))){ //Si la case (i2,lg) est de la même couleur que c, et n'est pas noire
 	  *k=i2;*l=lg;
-
-	  fprintf(stderr, "trouve!\n");
+	  printf("Piece trouvé gauche lg: (%d, %d)\n",*k,*l);
 	  return ;
 	}
-      }
-
-      if(i2>=0 && ld>=0 && i2<(G->n) && ld<(G->m) ){//idem
-        if(  G->T[i2][ld].piece >=0 && Case_est_Noire(G, i2, ld)==0
-
-	    ){ 
+	    
+      if(EstDansGrille(G, i2, ld) && ExistePiece(G, i2, ld) && (!Case_est_Noire(G, i2, ld)) ){
 	  *k=i2;*l=ld;
-
-	  fprintf(stderr, "trouve!\n");
+	  printf("Piece trouvé gauche ld: (%d, %d)\n",*k,*l);
 	  return ;
 	}
-      }
-  
-      i2++;
-      lg=lg-1;
-      ld=ld+1;
+   
 
-    
-    }//fin While
+      lg = lg - 1;
+      ld = ld + 1;
+      
+    }//fin for
 
 
 
-    
-    i2=i+1;
-    lg=j-L+1;
-    ld=j+L-1;
-
-    while(i2<=i+r){ //case a distance r de (i,j) qui sont droite de (i,j)
+    lg = j-L+1;
+    ld = j+L-1;
+    for (i2=i+1;i2<=i+L;i++){
+      if( EstDansGrille(G, i2, lg) && ExistePiece(G, i2, lg) && (!Case_est_Noire(G, i2, lg))){ //Si la case (i2,lg) est de la même couleur que c, et n'est pas noire
+	  *k=i2;*l=lg;
+	  printf("Piece trouvé droite lg: (%d, %d)\n",*k,*l);
+	  return ;
+	}
       
 
-      if(i2>=0 && lg>=0 && i2<(G->n) && lg<(G->m) ){//si case est dans le tableau
-	if( G->T[i2][lg].piece >=0 && Case_est_Noire(G, i2, lg)==0){ //Si la case (k,l) contient une pièce et n'est pas noire 
-	  *k=i2;*l=lg;
-
-	  fprintf(stderr, "trouve!\n");
-	  return ;
-	}
-      }
-
-      if(i2>=0 && ld>=0 && i2<(G->n) && ld<(G->m) ){//idem
-        if(  G->T[i2][ld].piece >=0 && Case_est_Noire(G, i2, ld)==0 ){ 
+      if( EstDansGrille(G, i2, ld) && ExistePiece(G, i2, ld) && (!Case_est_Noire(G, i2, ld))){
 	  *k=i2;*l=ld;
-
-	  fprintf(stderr, "trouve!\n");
+	  printf("Piece trouvé droite ld: (%d, %d)\n",*k,*l);
 	  return ;
 	}
-      }
+      
+      lg = lg + 1;
+      ld = ld - 1;
+    }//fin for
+
+    L++;
+
     
-      i2++;
-      lg=lg+1;
-      ld=ld-1;
+  }//fin while
 
-    }//Fin While
   
-
-  }//Fin For
-
-  //si pas trouver
-  return;
-
+  printf("Pas trouver de case non noire.\n\n");
 }
-
-
-/* void RechercheCirculaire_c(Grille * G, int c, int i, int j, int * k, int * l) */
-/* { */
-/*   if( (*k)<0 || (*k)>(G->n) || (*l)<0 || (*l)>(G->m) ){ */
-
-/*     return;//on a dépassé la matrice */
-/*   }else if( c==G->T[*k][*l].fond && Case_est_Noire(G, *k, *l)==0){ //Si la case (k,l) est de la même couleur que c, et n'est pas noire */
-
-/*     fprintf(stderr, "trouve!\n"); */
-/*     return ; */
-/*   } else{ */
-
-/*     int k2=(*k)-1; */
-/*     int l2=(*l)-1; */
-/*     int k3=(*k)+1; */
-/*     int l3=(*l)+1; */
-/*     if(k2>=0)  RechercheCirculaire_c(G, c, i, j, &k2, l);//récursion à gauche */
-/*     printf("gauche k=%d , l=%d\n",k2,*l); */
-/*     RechercheCirculaire_c(G, c, i, j, k, &l2);//récursion en haut */
-/*     printf("haut k=%d , l=%d\n",*k,l2); */
-/*     RechercheCirculaire_c(G, c, i, j, &k3, l);//récursion à droite */
-/*     printf("droite k=%d , l=%d\n",k3,*l); */
-/*     RechercheCirculaire_c(G, c, i, j, k, &l3);//récursion en bas */
-/*     printf("bas k=%d , l=%d\n",*k,l3); */
-/*   } */
-/*   printf("fin!!!"); */
-/*   return; */
-/* } */
-
-/* void RechercheCirculaire_nn(Grille *G, int i, int j, int *k, int *l){ */
-  
-/*  if( (*k)< 0  || (*k)> (G->n) || (*l) < 0  ||  (*l) > (G->m) ){ */
-/*     return;//on a dépassé la matrice */
-/*   } else if( G->T[*k][*l].piece >=0 && Case_est_Noire(G, *k, *l)==0){ //Si la case (k,l) contient une pièce et n'est pas noire */
-/*     return; */
-/*   } else{ */
-/*    int k2=(*k)-1; */
-/*    int l2=(*l)-1; */
-/*    int k3=(*k)+1; */
-/*    int l3=(*l)+1; */
-/*     RechercheCirculaire_nn(G, i, j, &k2, l);//récursion à gauche */
-/*     RechercheCirculaire_nn(G, i, j, k, &l2 );//récursion en haut */
-/*     RechercheCirculaire_nn(G, i, j, &k3, l);//récursion à droite */
-/*     RechercheCirculaire_nn(G, i, j, k, &l3 );//récursion en bas */
-/*   } */
-
-/* } */
-
-
-
 
 
 
 
 void algorithme_circulaire(Grille *G, Solution *S){
   
-  int i = 0;
-  int j = 0;
-  int * k = malloc(sizeof(int));
-  int * l = malloc(sizeof(int));
-  int c;
+  int  k ;
+  int  l ;
+  int nb_total_noir = G->m * G->n;
+
+  printf("CPT au depart %d___\n\n",G-> cptr_noire);
   
-  while(G->cptr_noire< G->m*G->n){
+  while(G->cptr_noire < nb_total_noir){
+    int c=G-> T[G->ir][G->jr].robot;
 
     if(G->T[G->ir][G->jr].robot == -1){//robot n'a pas de piece
-      RechercheCirculaire_nn(G, G->ir, G->jr, k, l);//cherche case non noire
-      changement_case(G,*k,*l);//robot bouge a (k,l)
-      PlusCourtChemin(S, i,j, *k, *l);//ecrit dans solution le chemin le plus pris par le robot pour aller a (k,l)
-
-      //robot est sur une case non noire donc on peut recuperer la piece
-      swap_case(G);
+      RechercheCirculaire_nn(G, G->ir, G->jr, &k, &l);//cherche case non noire
+      
+    }else{  //robot possede une piece
+      RechercheCirculaire_c(G, c, G->ir, G->jr,&k,&l);//recherche la case de couleur c
     }
-    //robot possede une piece
-    else{
-    
-      c=G-> T[G->ir][G->jr].robot;
-    RechercheCirculaire_c(G, c, i, j, k, l);//recherche la case de couleur c
-    changement_case(G, *k, *l);
-    PlusCourtChemin(S, i, j, *k, *l);
-    swap_case(G);
 
-    
-   G-> cptr_noire++;//compteur noire +1
-    }//finelse
+
+
+    PlusCourtChemin(S, G->ir, G->jr, k, l);
+    changement_case(G,k,l);
+    swap_case(G);Ajout_action(S,'S');
+
+      printf("CPT %d___\n\n",G-> cptr_noire);
   }//fin while
-  free(k);
-  free(l);
 
+  
 
 }
-
-
-
-

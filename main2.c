@@ -7,7 +7,8 @@
 #include "API_AffGrille.h"
 #include "exo.h"
 
-
+#include <time.h>
+#include <string.h>
 
 int main(int argc,char**argv){
 
@@ -43,13 +44,23 @@ int main(int argc,char**argv){
   Solution_init(&S);
 
 
+  clock_t temps_init;
+  clock_t temps_fin;
+  double temps_cpu;
+  temps_init=clock();
+  temps_fin=clock();
 
+
+  temps_init =clock();//temps
   algorithme_circulaire(&G, &S);//ecrit la solution dans S
-  
-  Ecriture_Disque(G.m, G.n, G.nbcoul, graine, &S);//ficher .sol
+  temps_fin=clock();//temps
 
-	Affiche(&S);
-  
+  Ecriture_Disque(G.m, G.n, G.nbcoul, graine, &S);//ficher .sol
+  Affiche(&S);
+
+   temps_cpu=( (double) (temps_fin - temps_init ) / CLOCKS_PER_SEC );
+
+ printf ("circulaire temps = %f \n\n",temps_cpu);
 
 
 

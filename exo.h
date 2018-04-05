@@ -4,7 +4,7 @@
 #include "Grille.h"
 #include "Solution.h"
 #include "API_AffGrille.h"
-#include<math.h>
+#include <math.h>
 
 
 
@@ -26,5 +26,10 @@ void RechercheCirculaire_c(Grille * G, int c, int i, int j, int * k, int * l);
 void RechercheCirculaire_nn(Grille * G,  int i, int j, int * k, int * l);
 
 void algorithme_circulaire(Grille *G, Solution *S);
+
+int EstDansGrille(Grille* G, int i,int j);
+int PieceEgaleFond(Grille * G , int i,int j,int c);
+int ExistePiece(Grille *G, int i,int j);
+
 
 #endif
