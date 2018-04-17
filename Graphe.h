@@ -8,7 +8,7 @@ typedef struct sommet Sommet;
 typedef struct arete {
   struct sommet *succ;
   struct arete *suiv;
-} Arc;
+}Arc;
 
 struct sommet{
   int i,j;
@@ -20,7 +20,7 @@ struct sommet{
 typedef struct{
   int n,m;
   Sommet *** Tsom;
-} Graphe;
+}Graphe;
 
 
 void Graphe_init(Graphe *H, int m, int n);
