@@ -17,6 +17,8 @@ typedef struct {
 
 
 
+
+
 /* Alloue et retourne une cellule */
 CelluleLDC* creerCellule(int i, int j);
 
