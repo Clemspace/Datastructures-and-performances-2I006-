@@ -6,8 +6,9 @@
 
 
 typedef struct cell_circuit{
-LDC L;
+LDC * L;
 int jmin , jmax;
+struct cell_circuit *prec;
 struct cell_circuit *suiv;
 }Cell_circuit;
 
@@ -36,6 +37,11 @@ void Lcircuit_display(Lcircuit * circuit);
 
 void Lcircuit_free(Lcircuit * circuit);
 
+int LCVide(Lcircuit * circuit);
+
+void Cell_circuit_free(Lcircuit * circuit, Cell_circuit * nouv);
+
+void Cell_free(Cell_circuit * c);
 
 
 #endif
