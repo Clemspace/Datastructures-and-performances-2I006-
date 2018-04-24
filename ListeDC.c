@@ -3,26 +3,28 @@
 #include "ListeDC.h"
 
 CelluleLDC* creerCelluleLDC(int i, int j){
-  CelluleLDC* e =(CelluleLDC*)malloc(sizeof(CelluleLDC));
+  CelluleLDC* e =malloc(sizeof(CelluleLDC));
   e->prec=NULL;  /* Inutile mais bon reflexe */
   e->suiv=NULL;  /* Inutile mais bon reflexe */
   e->i=i;
   e->j=j;
   return e;
-
 }
 
 void LDCInitialise(LDC *ldc){
+
+  ldc = malloc(sizeof(LDC)); 
   ldc->premier=NULL;
   ldc->dernier=NULL;
+
 }
 
-int LDCVide(LDC* ldc){
- return (ldc->premier==NULL);
+int LDCVide(LDC* ldc){ 
+ return(ldc->premier==NULL|| ldc->dernier==NULL);
 }
 
 void LDCInsererEnTete(LDC* ldc, int i, int j){
-  CelluleLDC* nouv=creerCelluleLDC(i,j);
+  CelluleLDC* nouv = creerCelluleLDC(i,j);
   nouv->prec=NULL;
   if (LDCVide(ldc)) 
     ldc->dernier=nouv;
@@ -34,14 +36,27 @@ void LDCInsererEnTete(LDC* ldc, int i, int j){
 
 
 void LDCInsererEnFin(LDC* ldc, int i, int j){
-  CelluleLDC* nouv=creerCelluleLDC(i,j);
-  nouv->prec=ldc->dernier;
-  if (LDCVide(ldc)) 
-    ldc->premier=nouv;
-  else 
-    ldc->dernier->suiv=nouv;
+  
+fprintf(stderr, "%p\n", ldc->premier);
+  CelluleLDC* nouv = creerCelluleLDC(i,j);
+  fprintf(stderr, "%p , %p %p\n", nouv->prec, ldc->premier, ldc->dernier );
+
   nouv->suiv=NULL;
+  nouv->prec=ldc->dernier;
+
+
+  if (LDCVide(ldc)) {
+
+    ldc->premier=nouv;
+
+  }
+
+  else {
+    ldc->dernier->suiv=nouv;
+
+  }
   ldc->dernier=nouv;
+  return;
 }
 
 void LDCenleverCellule(LDC* ldc, CelluleLDC* c){

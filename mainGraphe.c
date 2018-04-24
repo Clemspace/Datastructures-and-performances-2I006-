@@ -50,6 +50,7 @@ int main(int argc,char**argv){
    Graphe_init(&H, G.m,G.n);
    Graphe_creation(&G, &H);
    Graphe_affiche(&H);
+   
    Graphe_Rech_Circuit(&H);
 
 

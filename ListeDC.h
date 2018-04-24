@@ -11,6 +11,7 @@ typedef struct celluleLDC{
 } CelluleLDC;
 
 typedef struct {
+
   CelluleLDC* premier;  /* Pointeur sur element en tete */
   CelluleLDC* dernier;  /* Pointeur sur element en fin */
 } LDC;
@@ -20,7 +21,7 @@ typedef struct {
 
 
 /* Alloue et retourne une cellule */
-CelluleLDC* creerCellule(int i, int j);
+CelluleLDC* creerCelluleLDC(int i, int j);
 
 void LDCInitialise(LDC *ldc);
 

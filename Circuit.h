@@ -6,28 +6,32 @@
 
 
 typedef struct cell_circuit{
-LDC * L;
-int jmin , jmax;
-struct cell_circuit *prec;
-struct cell_circuit *suiv;
+	LDC * L; //pointeur sur la liste des sommets du circuit considéré
+	int jmin , jmax;
+	struct cell_circuit *prec;
+	struct cell_circuit *suiv;
 }Cell_circuit;
 
 typedef struct{
-int nb_circuit;
-Cell_circuit *premier;
-Cell_circuit *dernier;
+	int nb_circuit;
+	Cell_circuit *premier;
+	Cell_circuit *dernier;
 }Lcircuit;
 
-void Graphe_Rech_Circuit(Graphe *H);
+Lcircuit *  Graphe_Rech_Circuit(Graphe *H);
 
 void Find_unvisited(Graphe *H, int* k, int* l);
 
 void Find_Circuit_rec(Graphe * H,Cell_circuit * cell, Sommet * sommet,int k, int l, int  * cpt); //trouve un circuit a partir de la case de cordonnees (k,l), et change les champs visité des sommets visites
 														 //on commencera par visiter le premier arc jusqu'a retourner sur la case d'origine.
 
-Cell_circuit *  CC_Init(LDC * L, int jmin, int jmax);
+Cell_circuit * Find_Circuit_ite(Graphe * H, Sommet * sommet, int * cpt);
 
-void LCircuit_Init(Lcircuit * circuit);
+
+Cell_circuit *  CC_Init(int jmin, int jmax);
+
+
+Lcircuit * LCircuit_Init();
 
 void Lcircuit_head_insert(Lcircuit * circuit, Cell_circuit * cell);
 
