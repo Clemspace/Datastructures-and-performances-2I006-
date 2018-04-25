@@ -6,12 +6,15 @@
 #include "Solution.h"
 #include "API_AffGrille.h"
 #include "exo.h"
+#include "Graphe.h"
+#include "ListeDC.h"
+#include "Circuit.h"
 
 
 
 int main(int argc,char**argv){
 
- 
+  Graphe H; 
   Grille G;
   AffGrille AG;
   Solution S;
@@ -42,17 +45,19 @@ int main(int argc,char**argv){
   Gene_Grille(&G,graine);
   Solution_init(&S);
 
+/* Génération du graphe et Affichage*/
 
-  
+   Graphe_init(&H, G.m,G.n);
+   Graphe_creation(&G, &H);
+   Graphe_affiche(&H);
+   
+   Lcircuit* slce=Graphe_Rech_Circuit(&H);
 
-  algorithme_naif(&G, &S);//ecrit la solution dans S
-  
-  Ecriture_Disque(G.m, G.n, G.nbcoul, graine, &S);//ficher .sol
-
-	Affiche(&S);
-  
+   Write_Lcircuit(slce, &S);
+   Ecriture_DisqueG(G.m, G.n, G.nbcoul, graine, &S);
+   Affiche(&S);
 
 
 
-return 0;}
-
+return 0;
+}

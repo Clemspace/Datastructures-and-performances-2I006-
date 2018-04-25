@@ -100,6 +100,37 @@ void Ecriture_Disque3(int m, int n, int nbcoul, int graine, Solution *S){
   fclose(f);
 }
 
+void Ecriture_DisqueG(int m, int n, int nbcoul, int graine, Solution *S){
+  char filename[104];
+  char inttochar[6];
+  
+  strcpy(filename,"LcircuitRobot_");
+  sprintf(inttochar,"%d",m);
+  strcat(filename,inttochar);
+  strcat(filename,"_");
+  sprintf(inttochar,"%d",n);
+  strcat(filename,inttochar);
+  strcat(filename,"_");
+  sprintf(inttochar,"%d",nbcoul);
+  strcat(filename,inttochar);
+  strcat(filename,"_");
+  sprintf(inttochar,"%d",graine);
+  strcat(filename,inttochar);
+  strcat(filename,".sol");
+
+  FILE *f=fopen(filename,"w");
+  fprintf(f,"%d %d %d %d\n", m, n, nbcoul, graine);
+
+  Cell_char *cour=S->prem;
+  while (cour!=NULL){
+    fprintf(f,"%c ",cour->a);
+    cour=cour->suiv;
+  }
+  fprintf(f,"0\n");
+
+  fclose(f);
+}
+
 void Lecture_Disque(char *filename, int *m, int *n, int *nbcoul, int *graine, Solution *S){
   char c;
   FILE* f=fopen(filename,"r");
@@ -116,3 +147,47 @@ void Lecture_Disque(char *filename, int *m, int *n, int *nbcoul, int *graine, So
   
   fclose(f);  
 }
+
+void PCC(Solution * S, int * i, int * j, int k, int l){
+
+  if(*i==k){ //on est sur la bonne ligne
+      if(*j==l){//on est sur la bonne colonne aussi, on termine
+      return;
+    }
+    else if(*j<l){ //on doit aller a droite
+              Ajout_action(S,'R');
+              fprintf(stderr, "Right\n");
+              *j++;
+              
+
+    }
+    else{//on doit aller a gauche
+      Ajout_action(S,'L');
+      fprintf(stderr, "Left\n");
+      *j--;
+      
+
+
+    }
+
+  }
+  else if(*i<k){// on doit aller en bas
+
+    Ajout_action(S,'D');
+    fprintf(stderr, "Down\n");
+    *i++;
+    
+
+
+  }
+  else if(*i>k){//on doit aller en haut
+
+    Ajout_action(S,'U');
+    fprintf(stderr, "Up\n");
+    *i--;
+    
+
+  }
+  PCC(S,i,j,k,l);
+}
+

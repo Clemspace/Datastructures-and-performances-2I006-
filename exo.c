@@ -160,28 +160,28 @@ int Case_est_Noire(Grille * G, int i, int j){
 
 
 void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
-  int x = (int)sqrt((k-i)*(k-i));
-  int y = (int)sqrt((l-j)*(l-j));
+                          
 
   if(j==l && i==k ){//on est déja sur la bonne case
+    printf("déja placé!\n");
     return;
   }
  
   if(i!=k){
-    int cpt = 0;
-    if(i>k){//on doit aller a gauche 
-      for(cpt = 0; cpt<x;cpt++){
-        fprintf(stderr, "PCCGauche %d %d %d %d %d\n",i,j, k,l, cpt );
+    int cpt;
+    if(i>k){ 
+      for(cpt = 0; cpt<i-k;cpt++){
 
         Ajout_action(S,'U');
+        fprintf(stderr, "PCCU %d %d %d %d %d\n",i,j, k,l, cpt );
+
       }
     }
-    if(i<k){//on doit aller a droite
-      for(cpt = 0; cpt<x;cpt++){
-        fprintf(stderr, "PCCDroite %d %d %d %d %d\n",i,j, k,l, cpt );
-
+    if(i<k){
+      for(cpt = 0; cpt<k-i;cpt++){
 
         Ajout_action(S,'D');
+        fprintf(stderr, "PCCD %d %d %d %d %d\n",i,j, k,l, cpt );
 
       }
     }
@@ -189,23 +189,21 @@ void PlusCourtChemin(Solution *S, int  i, int  j, int k,int l){
     }
     
     if(j!=l){
-    int cpt2 = 0;
+    int cpt2;
     
-    if(j>l){//on doit aller en bas 
-      for(cpt2 = 0; cpt2<y;cpt2++){
-        fprintf(stderr, "PCCBas %d %d %d %d %d\n",i,j, k,l, cpt2 );
-
-
+    if(j>l){ 
+      for(cpt2 = 0; cpt2<j-l;cpt2++){
         Ajout_action(S,'L');
+        fprintf(stderr, "PCCL %d %d %d %d %d\n",i,j, k,l, cpt2 );
+
       }
     }
 
-    if(j<l){//on doit aller en haut
-      for(cpt2 = 0; cpt2<y;cpt2++){
-        fprintf(stderr, "PCCHaut %d %d %d %d %d\n",i,j, k,l, cpt2 );
-
-
+    if(j<l){
+      for(cpt2 = 0; cpt2<l-j;cpt2++){
         Ajout_action(S,'R');
+        fprintf(stderr, "PCCR %d %d %d %d %d\n",i,j, k,l, cpt2 );
+
 
       }
     }

@@ -1,2 +1,0 @@
-10 10 20 7
-L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L U U U U U U U U U U U U U U U 0
