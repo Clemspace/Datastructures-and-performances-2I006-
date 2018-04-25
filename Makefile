@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -W -ggdb -g
 LDFLAGS= -lSDL -lm
-EXEC= Game_SortingRobot Checker_SortingRobot main main2 main3 main4 main_console mainGraphe
+EXEC= Game_SortingRobot Checker_SortingRobot main main2 main3 main4 main_console Graphe
 SRC= $(wildcard *.c)
 OBJ= $(SRC:.c=.o)
 
@@ -15,7 +15,7 @@ all: $(EXEC)
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-mainGraphe : mainGraphe.o Circuit.o Graphe.o ListeDC.o API_AffGrille.o Grille.o Solution.o entree_sortie.o
+Graphe : mainGraphe.o Circuit.o Graphe.o ListeDC.o API_AffGrille.o exo.o Grille.o Solution.o entree_sortie.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 main_console : main_console.o exo.o LDC.o exo4.o API_AffGrille.o Grille.o Solution.o entree_sortie.o 
 	$(CC) -o $@ $^ $(LDFLAGS)

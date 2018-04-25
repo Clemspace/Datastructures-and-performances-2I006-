@@ -1,0 +1,23 @@
+Liste d'idées et concepts pour mieux traiter les graphes
+
+	Il faut avoir a l'idée que dans le cas de la grille, le graphe résultant sera plus connexe moins il y aura de couleurs, et inversement.
+
+	On s'intéresse au nombre de circuits, si on considère une grille contenant m lignes, n colonnes, c couleurs, on aura un graphe résultant contenant m*n sommets, et pour chaque sommet en moyenne m*n/c arcs.
+	Si on note conidère le retour de touts les circuits pour une grille, on aura alors un nombre de cellules autour de 
+
+	Une première idée serait de donner plus d'informations intrinsèques aux circuits.Par exemple, être capable pour chaque circuit lescoordonnées du début et de la fin.EN effet, cela permet lorsqu'on traite un ensemble quelquonque de circuit, pour par exemple trouver le chemin de graphe où on minimise les déplacements entre les permutations( on notera que les cas où cette distance est minimale, que cela correspond au retour des fonctions traitées dans la partie 1. )
+
+	Aussi, on pourra distinguer la distance parcourue au sein de chaque circuit, où on favorisera le traitement des graphes où le déplacement interne est minimal, où le cas ou le quotient "la distance parcourue par nombres de cases résolues" est maximisé.
+
+	On peut aussi immaginer un graphe de circuits. Pour une grille, (m,n,c), on lui associe un graphe résultant, et ce traitement de ce graphe se fera par un parcours, suivant les règles:
+
+		Pour chaque sommet, on parcourt tous arcs récursivement du graphe, et on retourne les circuits associés a ce sommet, soit la ldc des circuits retournant sur le sommet de base,on fait cela pour tous les arcs.
+
+		On aura en résultat un circuit avec les coordonnées de son origine, et son nombre d'éléments.
+
+
+	Pour chaque case, on retourne la liste des circuits associés, soit les parcours du graphe tels qu'on revient sur la première case.
+
+Ici, on va essayer d'implémenter l'algo de djigstra pour chaque sommet.
+
+Une fois qu'on a le graphe, il n'est plus nécessaire de traiter sur la grille.

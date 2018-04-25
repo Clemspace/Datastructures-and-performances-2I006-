@@ -51,8 +51,11 @@ int main(int argc,char**argv){
    Graphe_creation(&G, &H);
    Graphe_affiche(&H);
    
-   Graphe_Rech_Circuit(&H);
+   Lcircuit* slce=Graphe_Rech_Circuit(&H);
 
+   Write_Lcircuit(slce, &S);
+   Ecriture_DisqueG(G.m, G.n, G.nbcoul, graine, &S);
+   Affiche(&S);
 
 
 

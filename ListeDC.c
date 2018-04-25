@@ -37,9 +37,7 @@ void LDCInsererEnTete(LDC* ldc, int i, int j){
 
 void LDCInsererEnFin(LDC* ldc, int i, int j){
   
-fprintf(stderr, "%p\n", ldc->premier);
   CelluleLDC* nouv = creerCelluleLDC(i,j);
-  fprintf(stderr, "%p , %p %p\n", nouv->prec, ldc->premier, ldc->dernier );
 
   nouv->suiv=NULL;
   nouv->prec=ldc->dernier;

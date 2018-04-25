@@ -3,7 +3,9 @@
 #include "Circuit.h"
 
 
-Lcircuit * Graphe_Rech_Circuit(Graphe *H){
+//void Graphe_Rech_Circuit(Graphe *H, Lcircuit * LC){}
+
+Lcircuit * Graphe_Rech_Circuit(Graphe *H){ //retourne une liste de circuits couvrants de la grille et du graphe
 	
 	int parcours = 0;
 	int i,j;
@@ -159,7 +161,6 @@ void Lcircuit_head_insert(Lcircuit * circuit, Cell_circuit * nouv){
 
 void Lcircuit_tail_insert(Lcircuit * circuit, Cell_circuit * nouv){
 
-	fprintf(stderr, "etat des pointeurs insertion queue LC (%p, %p), (%p,%p)\n",circuit->premier, circuit->dernier, nouv->L->premier, nouv->L->dernier);
   nouv->prec=circuit->dernier;
   if (LCVide(circuit)) 
     circuit->premier=nouv;
@@ -206,4 +207,62 @@ void Cell_free(Cell_circuit * c){
 	LDCdesalloue(c->L);
 	free(c);
 }
+
+void Write_Lcircuit(Lcircuit * circuit, Solution * S){
+
+	//D'abord, on parcourt la distance entre (0,0) et le premier sommet du premier circuit.
+	int i=0,j=0;
+	Cell_circuit * pc = circuit->premier;
+	
+	if(circuit->premier->L->premier->i!=0||circuit->premier->L->premier->j!=0){
+		PlusCourtChemin(S,i,j,circuit->premier->L->premier->i,circuit->premier->L->premier->j);
+	}
+
+
+	//Puis on parcourt la liste, en n'oubliant pas d'écrire les changements pour passer d'un circuit à l'autre.
+	
+	while(pc!=circuit->dernier){
+
+		fprintf(stderr, "WhileLC\n" );
+		Ajout_action(S,'S');
+
+		Write_LDC(pc->L, S);
+		PlusCourtChemin(S,pc->L->premier->i,pc->L->premier->j,pc->suiv->L->premier->i,pc->suiv->L->premier->j); //passe d'un circuit a l'autre
+
+		pc = pc->suiv;
+
+	}
+
+	Ajout_action(S,'S');
+	Write_LDC(circuit->dernier->L, S);
+
+	return;
+
+}
+
+void Write_LDC(LDC * L, Solution * S){
+
+	//On parcourt toute la liste et on écrit les déplacements entre deux cellules de la première a la dernière
+	int i,j,k,l;
+	CelluleLDC * pl = L->premier;
+	
+	while(pl->suiv){
+		
+		fprintf(stderr, "whileWLDC\n" );
+		i = pl->i;
+		j = pl->j;
+		k = pl->suiv->i;
+		l = pl->suiv->j;
+
+		PlusCourtChemin(S, i,j,k,l);
+		Ajout_action(S,'S');
+		pl = pl->suiv;
+	} 
+
+	PlusCourtChemin(S, L->dernier->i, L->dernier->j, L->premier->i, L->premier->j);//Pour retourner sur la case d'origine
+	Ajout_action(S,'S');
+
+	return;
+}
+
 
