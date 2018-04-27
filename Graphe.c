@@ -2,6 +2,7 @@
 #include"Graphe.h"
 #include"ListeDC.h"
 #include<stdio.h>
+#include <math.h>
 
 
 void Graphe_init(Graphe *H, int m, int n){
@@ -31,7 +32,8 @@ void Graphe_ajout_arc(Graphe *H, int i1, int j1, int i2, int j2){
   Arc *a=(Arc*) malloc(sizeof(Arc));
   a->succ=H->Tsom[i2][j2];
   a->suiv=H->Tsom[i1][j1]->Lsucc;
-  H->Tsom[i1][j1]->Lsucc=a;  
+  H->Tsom[i1][j1]->Lsucc=a;
+  a->poids = fabs(j2-j1)+fabs(i2-i1);  
 }
 
 
@@ -81,7 +83,7 @@ void Graphe_affiche(Graphe *H){
 	printf(" arc vers ");
 	cour=H->Tsom[i][j]->Lsucc;
 	while (cour!=NULL){
-	  printf("(%d,%d) ", cour->succ->i, cour->succ->j);
+	  printf("(%d,%d) poids:%d ", cour->succ->i, cour->succ->j, cour->poids);
 	  cour=cour->suiv;
 	}
 	printf("\n");

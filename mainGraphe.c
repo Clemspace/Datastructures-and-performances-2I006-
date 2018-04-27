@@ -50,10 +50,28 @@ int main(int argc,char**argv){
    Graphe_init(&H, G.m,G.n);
    Graphe_creation(&G, &H);
    Graphe_affiche(&H);
-   
-   Lcircuit* slce=Graphe_Rech_Circuit(&H);
+
+   int cas = 0;
+
+   Lcircuit* slce;
+
+   if(G.m==1){ //résolution pour un vecteur
+    cas++;
+   }
+   if (G.m*G.n==G.nbcoul){//cas une case par couleur
+    cas+=2;
+   }
+
+   switch(cas){
+    case 3://mettre ici l'algo pour vecteur 1case/couleur
+    case 2://mettre ici l'algo pour cas 1case/couleur 
+    case 1://mettre ici l'algo pour vecteur 
+    case 0: slce = Graphe_Rech_Circuit(&H);//cas par défaut
+            break;
+   }
 
    Write_Lcircuit(slce, &S);
+
    Ecriture_DisqueG(G.m, G.n, G.nbcoul, graine, &S);
    Affiche(&S);
 

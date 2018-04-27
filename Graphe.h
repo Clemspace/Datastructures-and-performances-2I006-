@@ -6,6 +6,7 @@
 typedef struct sommet Sommet;
 
 typedef struct arete {
+	int poids; //la distance entre les deux sommets qu'elle relie(forcément positive)
   struct sommet *succ;
   struct arete *suiv;
 }Arc;
