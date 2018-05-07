@@ -92,7 +92,7 @@ Cell_circuit * Find_Circuit_ite(Graphe * H,  Sommet * sommet, int * cpt){
 
 	Sommet * psom = sommet;
 
-	Cell_circuit * circuit = CC_Init(0,0);
+	Cell_circuit * circuit = CC_Init(H->n,0);
 
 	while (psom->visit!= 0){
 
@@ -264,5 +264,53 @@ void Write_LDC(LDC * L, Solution * S){
 
 	return;
 }
+
+void CalculJminJmax(Lcircuit *LC){ //cette fonction va parcourir les circuits, initialiser les bonnes valeurs de jmax et jmin pour chaque circuit, et les trier dans l'ordre croissant des jmin dans LC
+
+
+	Cell_circuit * pc = LC->premier;
+
+	while(pc!=LC->dernier){
+
+		SetJminmax(pc);
+
+		pc = pc->suiv;
+	}
+
+	//maintenant, on trie les circuits et on les mets dans l'ordre dans LC
+
+	int jmin = pc->L->jmin;
+	return;
+
+
+
+}
+void SetJminmax(Cell_circuit * pc){ //on parcourt le circuit, et on actualise les valeurs de jmin et jmax au fur et a mesure du parcours
+
+	Cell_circuit * pl = pc->L->premier;
+
+
+	while(pl->suiv){
+
+		if(pl->j > pc->jmax){
+			pc->jmax = pl->j;
+		}
+
+		if(pl->j< pc->jmin){
+			pc->jmin = pl->j;
+		}
+		
+		pl = pl->suiv;
+
+	}
+
+	return;
+
+
+
+
+
+}
+
 
 

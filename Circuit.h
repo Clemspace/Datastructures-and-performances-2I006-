@@ -58,4 +58,9 @@ void Write_Lcircuit(Lcircuit * circuit, Solution * S); //fonction qui prend une 
 
 void Write_LDC(LDC * l, Solution * S);
 
+void CalculJminJmax(Lcircuit *LC);
+
+void SetJminmax(Cell_circuit * pc);
+
+
 #endif
