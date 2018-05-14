@@ -372,7 +372,7 @@ void Ajout_circuit_dans_solution(LDC *L, Solution *S, Cell_char *c, Cell_char **
 
 void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S){
 
-	if(G.m !=1){
+	if(G->m !=1){
 		printf("Poblème sur le format de la Grille: ce n'est pas un vecteur!\n");
 		return;
 	}
@@ -388,7 +388,7 @@ void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S){
 
 	Solution_init(S); //Initialise la solution
 
-	Cell_Char ** Tref = G->n* malloc(sizeof(Cell_Char*)); //tableau de pointeurs vers soluton Tref avec cases initialisées a NULL
+	Cell_char ** Tref = malloc( G->n*sizeof(Cell_char*)); //tableau de pointeurs vers soluton Tref avec cases initialisées a NULL
 	for (i = 0; i < G->n; i++)
 	{
 		Tref[i] = NULL;
@@ -396,7 +396,7 @@ void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S){
 
 	jDroite = 0;
 	flag = 0;
-	Circuit  * pcirc = Lcirc->premier;
+	Cell_circuit  * pcirc = Lcirc->premier;
 
 	for (i = 0; i < Lcirc->nb_circuit; i++){ //pour chaque circuit dans l'ordre des jmin croissants
 
