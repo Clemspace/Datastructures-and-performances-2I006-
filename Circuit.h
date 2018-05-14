@@ -62,5 +62,7 @@ void CalculJminJmax(Lcircuit *LC);
 
 void SetJminmax(Cell_circuit * pc);
 
+void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S);
+
 
 #endif

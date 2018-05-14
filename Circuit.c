@@ -312,5 +312,51 @@ void SetJminmax(Cell_circuit * pc){ //on parcourt le circuit, et on actualise le
 
 }
 
+void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S){
+
+	if(G.m !=1){
+		printf("Poblème sur le format de la Grille: ce n'est pas un vecteur!\n");
+		return;
+	}
+	int i, jDroite, flag, jDroiteSav;
+	Graphe *H;
+	Graphe_init(H,G.m, G.n);
+	Graphe_creation(G, H); //crée le graphe associé a la grille
+
+	Lcircuit * Lcirc = Graphe_Rech_Circuit(H); //crée la liste des circuits du graphe
+
+
+	CalculJminJmax(Lcirc); //met a jour les jmin et jmax de chaque circuit
+
+	Solution_init(S); //Initialise la solution
+
+	Cell_Char * Tref = G.n* malloc(sizeof(Cell_Char)); //tableau de pointeurs vers soluton Tref avec cases initialisées a NULL
+	for (i = 0; i < G.n; i++)
+	{
+		Tref[i] = NULL;
+	}
+
+	jDroite = 0;
+	flag = 0;
+	Circuit  * pcirc = Lcirc->premier;
+
+	for (i = 0; i < Lcirc->nb_circuit; i++){ //pour chaque circuit dans l'ordre des jmin croissants
+
+		if(Tref[pcirc->jmin]==NULL){
+			flag = 1;
+			jDroiteSav = jDroite;
+
+		}
+
+	}
+	
+
+
+
+
+
+}
+
+
 
 
