@@ -270,16 +270,16 @@ void CalculJminJmax(Lcircuit *LC){ //cette fonction va parcourir les circuits, i
 
 	Cell_circuit * pc = LC->premier;
 
-	while(pc!=LC->dernier){
+	while(pc!=LC->dernier->suiv){
 
 		SetJminmax(pc);
 
 		pc = pc->suiv;
 	}
 
-	//maintenant, on trie les circuits et on les mets dans l'ordre dans LC
+	//maintenant, on trie les circuits et on les mets dans l'ordre dans LC( on admettera qu'ils sont déja dans l'ordre croissant des jmin)
 
-	int jmin = pc->L->jmin;
+	//int jmin = pc->L->jmin;	
 	return;
 
 
@@ -287,10 +287,10 @@ void CalculJminJmax(Lcircuit *LC){ //cette fonction va parcourir les circuits, i
 }
 void SetJminmax(Cell_circuit * pc){ //on parcourt le circuit, et on actualise les valeurs de jmin et jmax au fur et a mesure du parcours
 
-	Cell_circuit * pl = pc->L->premier;
+	CelluleLDC * pl = pc->L->premier;
 
 
-	while(pl->suiv){
+	while(pl){
 
 		if(pl->j > pc->jmax){
 			pc->jmax = pl->j;
