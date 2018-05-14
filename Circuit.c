@@ -307,7 +307,65 @@ void SetJminmax(Cell_circuit * pc){ //on parcourt le circuit, et on actualise le
 	return;
 
 
+Cell_char* Ajout_action_apres_c(Solution *S, Cell_char *c, int j, char a, Cell_char
+**Tref) {//c est un pointeur au milieu des Cell_char de S 
 
+	//on creer la cellule pour le nouveau deplacement a
+	Cell_char *nouv=(Cell_char*) malloc(sizeof(Cell_char));
+	nouv->a=a;
+	nouv->suiv=NULL;
+
+
+	Cell_char *tmp;
+
+	if (c==NULL){//on insert en tete de la liste
+		tmp=S->prem;
+		S->prem=nouv;
+		S->prem->suiv=tmp;
+
+		if (a!='S') S->cptr_pas++;//incrementer les pas 
+		Tref[j]=c;//mettre a jour Tref
+		
+		return S->prem; //returne le pointeur sur la cellule inserer 
+
+	}else{//insert apres le pointeur c
+		tmp=c->suiv;		
+		c->suiv=nouv;
+		c->suiv->suiv=tmp;
+
+		if (a!='S') S->cptr_pas++;
+		Tref[j]=c;
+
+		return c->suiv->suiv;
+	}
+
+}
+
+
+/* Cell_char* pluscourtchemin_apres_c(Solution *S, Cell_char *c, int j, int l, Cell_char */
+/* **Tref){//c = le chemin fait de R ou de L a inserer dans S entre la case j et la case l */
+/* 	int k; */
+/* 	char tmpA=c->a; */
+/* 	Cell_char * CellTmp; */
+	
+/* 	//pointer sur case j ?	 */
+/* //... */
+
+/* 	for(k=j;k<=l;k++){ */
+/* 		CellTmp=Ajout_action_apres_c(S, Cell_char *c, k, tmpA, Tref); */
+/* 	} */
+
+
+
+/* 	return CellTmp;//le derniercellule ajoutée à S */
+/* } */
+
+
+void Ajout_circuit_dans_solution(LDC *L, Solution *S, Cell_char *c, Cell_char ** Tref, int* Jdroite){
+
+
+
+}
 
 
 }
@@ -331,7 +389,7 @@ void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S){
 	Solution_init(S); //Initialise la solution
 
 	Cell_Char * Tref = G.n* malloc(sizeof(Cell_Char)); //tableau de pointeurs vers soluton Tref avec cases initialisées a NULL
-	for (i = 0; i < G.n; i++)
+	for (i = 0; i < G->n; i++)
 	{
 		Tref[i] = NULL;
 	}

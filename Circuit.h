@@ -62,6 +62,14 @@ void CalculJminJmax(Lcircuit *LC);
 
 void SetJminmax(Cell_circuit * pc);
 
+Cell_char* Ajout_action_apres_c(Solution *S, Cell_char *c, int j, char a, Cell_char
+**Tref);
+
+/* Cell_char* pluscourtchemin_apres_c(Solution *S, Cell_char *c, int j, int l, Cell_char */
+
+void Ajout_circuit_dans_solution(LDC *L, Solution *S, Cell_char *c, Cell_char ** Tref, int* Jdroite);
+
+
 void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S);
 
 
