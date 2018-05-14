@@ -403,7 +403,7 @@ void algorithme_circuit_CasLigne1x1(Grille *G, Solution *S){
 		if(Tref[pcirc->jmin]==NULL){
 			flag = 1;
 			jDroiteSav = jDroite;
-
+			S->dern = pluscourtchemin_apres_c(S, S->dern, j,l,Tref);
 		}
 
 	}
